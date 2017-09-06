@@ -18,7 +18,7 @@
   },
   "autoload" : {
     "psr-4" : {
-      "Resomedia\\DoctrineEncryptBundle\\" : "src"
+      "Resomedia\\DoctrineEncryptBundle\\" : ""
     }
   }
 }

@@ -17,8 +17,8 @@ class EncryptDataCommand extends ContainerAwareCommand
         $this
             ->setName('doctrine:encrypt:data')
             ->setDescription('Encrypt data in argument')
-            ->addArgument('encryptorclass', InputArgument::OPTIONAL, 'The encryptor you want to decrypt the data with')
-            ->addArgument("data", InputArgument::REQUIRED, 'The data you want to encrypt');
+            ->addArgument("data", InputArgument::REQUIRED, 'The data you want to encrypt')
+            ->addArgument('encryptorclass', InputArgument::OPTIONAL, 'The encryptor you want to decrypt the data with');
     }
 
     /**

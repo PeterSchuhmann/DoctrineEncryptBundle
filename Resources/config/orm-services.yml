@@ -1,0 +1,15 @@
+services:
+    resomedia_doctrine_encrypt.orm_subscriber:
+        class: Resomedia\DoctrineEncryptBundle\Subscribers\DoctrineEncryptSubscriber
+        arguments: ["@annotation_reader", "%resomedia_doctrine_encrypt.encryptor_class%", "%resomedia_doctrine_encrypt.secret_key%", "%resomedia_doctrine_encrypt.protocol%", "%resomedia_doctrine_encrypt.iv%"]
+        tags:
+            -  { name: doctrine.event_subscriber }
+    resomedia_doctrine_encrypt.subscriber:
+        alias: resomedia_doctrine_encrypt.orm_subscriber
+    resomedia_doctrine_encrypt.encryptor:
+        class: Resomedia\DoctrineEncryptBundle\Services\Encryptor
+        arguments:
+            - "%resomedia_doctrine_encrypt.encryptor_class%"
+            - "%resomedia_doctrine_encrypt.secret_key%"
+            - "%resomedia_doctrine_encrypt.protocol%"
+            - "%resomedia_doctrine_encrypt.iv%"

@@ -1,0 +1,24 @@
+{
+  "name" : "resomedia/doctrine-encrypt-bundle",
+  "description" : "Encrypt and decrypt entity's field with openssl",
+  "type" : "symfony-bundle",
+  "authors" : [{
+    "name" : "jérémy pasini"
+  }],
+  "keywords" : [
+    "doctrine encrypt decrypt openssl"
+  ],
+  "license" : [
+    "MIT"
+  ],
+  "require" : {
+    "php": ">=5.4",
+    "symfony/framework-bundle": ">=2.5",
+    "doctrine/orm": ">=2.5"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Resomedia\\DoctrineEncryptBundle\\" : "src"
+    }
+  }
+}

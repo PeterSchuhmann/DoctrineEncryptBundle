@@ -32,7 +32,7 @@ class Encryptor implements EncryptorInterface
      */
     public function __construct($secretKey, $protocol, $iv)
     {
-        $this->secretKey = hash('sha256', $secretKey);
+        $this->secretKey = $secretKey;
         $this->protocol = $protocol;
         $this->vector = $iv;
     }

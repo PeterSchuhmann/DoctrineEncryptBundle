@@ -8,9 +8,9 @@ Inspired by https://github.com/ambta/DoctrineEncryptBundle & https://github.com/
 
 It gives you the opportunity to add the @Encrypt annotation above each string property
 
-/**
- * @Encrypt
- */
+    /**
+     * @Encrypt
+     */
 protected $username;
 
 The bundle uses doctrine his life cycle events to encrypt the data when inserted into the database and decrypt the data when loaded into your entity manager. It is only able to encrypt string values at the moment, numbers and other fields will be added later on in development.
@@ -132,6 +132,7 @@ Encrypt / decrypt a data specified in argument.
 2 argument :
 
 -The data you want to encrypt/decrypt.
+
 -The encryptor you want to decrypt the data with (optional)
 
 #####Encrypt / decrypt database
@@ -145,6 +146,7 @@ Encrypt / decrypt all datas in database with field have @Encrypted annotation if
 2 argument :
 
 -The encryptor you want to decrypt the data with (optional)
+
 -The batchSize, number of row encrypt / decrypt between two flush (optional | default : 200)
 
 ####Custom encryption class

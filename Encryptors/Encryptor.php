@@ -47,7 +47,7 @@ class Encryptor implements EncryptorInterface
      */
     public function encrypt($data)
     {
-        $value = base64_encode(openssl_encrypt($data, $this->protocol, $this->secretKey, 0, $this->vector));
+        $value = openssl_encrypt($data, $this->protocol, $this->secretKey, 0, $this->vector);
         if ($value === false) {
             throw new \Exception('Impossible to crypt data');
         }
@@ -64,7 +64,7 @@ class Encryptor implements EncryptorInterface
      */
     public function decrypt($data)
     {
-        $value = openssl_decrypt(base64_decode(str_replace('[ENC]', '',$data)), $this->protocol, $this->secretKey, 0, $this->vector);
+        $value = openssl_decrypt(str_replace('[ENC]', '',$data), $this->protocol, $this->secretKey, 0, $this->vector);
         if ($value === false) {
             throw new \Exception('Impossible to decrypt data');
         }

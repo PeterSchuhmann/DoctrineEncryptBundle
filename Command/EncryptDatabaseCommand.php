@@ -73,7 +73,7 @@ class EncryptDatabaseCommand extends AbstractCommand
         }
         if ($searchedListener) {
             $evm = $this->entityManager->getEventManager();
-            $evm->removeEventListener(array('preUpdate', 'postLoad', 'preFlush', 'postFlush'), $searchedListener);
+            $evm->removeEventListener(array('preUpdate', 'postUpdate', 'postLoad', 'preFlush', 'postFlush'), $searchedListener);
         }
 
         //Loop through entity manager meta data

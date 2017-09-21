@@ -251,7 +251,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber {
                             //Get the information (value) of the property
                             try {
                                 $getInformation = $entity->$getter();
-                            } catch(\Exception $e) {
+                            } catch (\Exception $e) {
                                 $getInformation = null;
                             }
 
@@ -259,17 +259,17 @@ class DoctrineEncryptSubscriber implements EventSubscriber {
                              * Then decrypt, encrypt the information if not empty, information is an string and the <ENC> tag is there (decrypt) or not (encrypt).
                              * The [ENC] will be added at the end of an encrypted string so it is marked as encrypted. Also protects against double encryption/decryption
                              */
-                            if($encryptorMethod == "decrypt") {
-                                if(!is_null($getInformation) and !empty($getInformation)) {
-                                    if(strpos($getInformation, '[ENC]') !== false) {
+                            if ($encryptorMethod == "decrypt") {
+                                if (!is_null($getInformation) and !empty($getInformation)) {
+                                    if (strpos($getInformation, '[ENC]') !== false) {
                                         $this->decryptCounter++;
                                         $currentPropValue = $this->encryptor->decrypt($getInformation);
                                         $entity->$setter($currentPropValue);
                                     }
                                 }
                             } else {
-                                if(!is_null($getInformation) and !empty($getInformation)) {
-                                    if(strpos($getInformation, '[ENC]') === false) {
+                                if (!is_null($getInformation) and !empty($getInformation)) {
+                                    if (strpos($getInformation, '[ENC]') === false) {
                                         $this->encryptCounter++;
                                         $currentPropValue = $this->encryptor->encrypt($entity->$getter());
                                         $entity->$setter($currentPropValue);

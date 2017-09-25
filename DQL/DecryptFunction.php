@@ -49,6 +49,6 @@ class DecryptFunction extends FunctionNode
      * @return string
      */
     public function getSql(SqlWalker $sqlWalker) {
-        return "AES_DECRYPT(SUBSTRING(" . $this->stringCrypt->field . ", 6), '" . $this->key->value . "', '" . $this->iv->value . "')";
+        return "CAST(AES_DECRYPT(REPLACE(" . $this->stringCrypt->field . ", '[ENC]', ''), '" . $this->iv->value . "', '" . $this->key->value . "') AS CHAR)";
     }
 }

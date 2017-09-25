@@ -230,11 +230,17 @@ class DoctrineEncryptSubscriber implements EventSubscriber {
                     $this->handleEmbeddedAnnotation($entity, $refProperty, $isEncryptOperation);
                     continue;
                 }
+                $propName = $refProperty->getName();
                 /**
                  * If followed standards, method name is getPropertyName, the propertyName is lowerCamelCase
                  * So just uppercase first character of the property, later on get and set{$methodName} wil be used
+                 * and replace the '_' by uppercase
                  */
-                $methodName = ucfirst($refProperty->getName());
+                $tabName = explode('_', $propName);
+                $methodName = '';
+                foreach ($tabName as $tabNameExplode) {
+                    $methodName .= ucfirst($tabNameExplode);
+                }
                 /**
                  * If property is an normal value and contains the Encrypt tag, lets encrypt/decrypt that property
                  */
@@ -243,7 +249,6 @@ class DoctrineEncryptSubscriber implements EventSubscriber {
                      * If it is public lets not use the getter/setter
                      */
                     if ($refProperty->isPublic()) {
-                        $propName = $refProperty->getName();
                         $entity->$propName = $this->encryptor->$encryptorMethod($refProperty->getValue());
                     } else {
                         //If private or protected check if there is an getter/setter for the property, based on the $methodName
@@ -295,7 +300,11 @@ class DoctrineEncryptSubscriber implements EventSubscriber {
         $embeddedEntity = null;
         $reflectionClass = new ReflectionClass($entity);
         $propName = $embeddedProperty->getName();
-        $methodName = ucfirst($propName);
+        $tabName = explode('_', $propName);
+        $methodName = '';
+        foreach ($tabName as $tabNameExplode) {
+            $methodName .= ucfirst($tabNameExplode);
+        }
         if ($embeddedProperty->isPublic()) {
             $embeddedEntity = $embeddedProperty->getValue();
         } else {

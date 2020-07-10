@@ -18,22 +18,28 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('resomedia_doctrine_encrypt');
+        $treeBuilder = new TreeBuilder('resomedia_doctrine_encrypt');
+
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $rootNode = $treeBuilder->root('resomedia_doctrine_encrypt');
+        }
 
         $rootNode
             ->children()
-                ->scalarNode('protocol')
-                    ->isRequired()
-                ->end()
-                ->scalarNode('iv')
-                    ->isRequired()
-                ->end()
-                ->scalarNode('secret_key')
-                ->end()
-                ->scalarNode('encryptor_class')
-                    ->defaultValue(Encryptor::class)
-                ->end()
+            ->scalarNode('protocol')
+            ->isRequired()
+            ->end()
+            ->scalarNode('iv')
+            ->isRequired()
+            ->end()
+            ->scalarNode('secret_key')
+            ->end()
+            ->scalarNode('encryptor_class')
+            ->defaultValue(Encryptor::class)
+            ->end()
             ->end();
 
         return $treeBuilder;
